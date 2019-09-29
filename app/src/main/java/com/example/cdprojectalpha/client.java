@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class client {
-    public static Socket socket = null;            //Server와 통신하기 위한 Socket
+    public static Socket socket = null;            //Server와 통신하기 위한 소켓
 
     public void server_test(String ip)
     {
