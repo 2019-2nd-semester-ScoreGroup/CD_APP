@@ -7,10 +7,12 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     public static int connect = 0;
     Button b, b2;
+    TextView t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,20 +21,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         b = findViewById(R.id.button);
         b2 = findViewById(R.id.button2);
+        t = findViewById(R.id.textView14);
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(getApplicationContext(), controller.class);
-                startActivity(in);
+                t.setText("시작");
+//                Intent in = new Intent(getApplicationContext(), controller.class);
+//                startActivity(in);
             }
         });
 
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(getApplicationContext(), option.class);
-                startActivity(in);
+                t.setText("옵션");
+//                Intent in = new Intent(getApplicationContext(), option.class);
+//                startActivity(in);
             }
         });
     }
