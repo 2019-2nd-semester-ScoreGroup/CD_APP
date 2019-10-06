@@ -1,17 +1,22 @@
 package com.example.cdprojectalpha;
 
-import java.io.IOException;
 import java.net.Socket;
 
-public class client {
-    public static Socket socket = null;            //Server와 통신하기 위한 소켓
+public class client extends Thread {
+    Socket socket = null;
+    String ip;
+    int port;
 
-    public void server_test(String ip)
-    {
+    public void set_connect(String s, int i){
+        ip = s;
+        port = i;
+    }
+
+    public void run() {
         try {
-            socket = new Socket(ip, 8888);
+            socket = new Socket(ip, port);
             MainActivity.connect = 1;
-        }catch(IOException e) {
+        } catch (Exception e) {
             MainActivity.connect = 0;
         }
     }
