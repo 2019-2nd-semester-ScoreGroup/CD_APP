@@ -15,9 +15,9 @@ public class client extends Thread {
     public void run() {
         try {
             socket = new Socket(ip, port);
-            MainActivity.connect = 1;
+            option.connect = 1;
         } catch (Exception e) {
-            MainActivity.connect = 0;
+            option.connect = 0;
         }
     }
 }

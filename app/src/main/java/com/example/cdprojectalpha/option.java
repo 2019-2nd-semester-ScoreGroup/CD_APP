@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class option extends AppCompatActivity {
+    public static client c = new client();
+    public static int connect = 0;
     int iport;
     Button b1, b2, b3;
     EditText ip, port;
@@ -56,16 +58,16 @@ public class option extends AppCompatActivity {
                     set_string(sip, sport);
                     set_text(v1, v2, sport);
                 }
+
+                c.set_connect(sip, iport);
+                c.start();
             }
         });
 
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                client c= new client();
-                c.set_connect(sip, iport);
-                c.start();
-                if(MainActivity.connect == 1)
+                if(connect == 1)
                     Toast.makeText(option.this, "연결 성공!", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(option.this, "연결 실패", Toast.LENGTH_SHORT).show();
@@ -75,7 +77,7 @@ public class option extends AppCompatActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.connect = 1;
+                connect = 1;
             }
         });
     }

@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    public static int connect = 0;
     Button b, b2;
     TextView t;
 
