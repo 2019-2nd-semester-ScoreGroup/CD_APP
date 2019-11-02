@@ -46,7 +46,7 @@ public class controller extends AppCompatActivity {
         t = findViewById(R.id.textView9);
         t.setMovementMethod(new ScrollingMovementMethod());
 
-        if(MainActivity.connect == 1) {
+        if(option.connect == 1) {
             timecheck();
             str.append(" 연결 성공!\n");
             t.setText(str);

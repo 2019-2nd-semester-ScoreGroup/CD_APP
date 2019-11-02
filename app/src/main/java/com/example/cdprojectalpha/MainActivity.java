@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    public static int connect = 0;
     Button b, b2;
 
     @Override
@@ -26,15 +25,16 @@ public class MainActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
-//                Intent in = new Intent(getApplicationContext(), controller.class);
-//                startActivity(in);
+//                t.setText("시작");
+                Intent in = new Intent(getApplicationContext(), controller.class);
+                startActivity(in);
             }
         });
 
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                t.setText("옵션");
                 Intent in = new Intent(getApplicationContext(), option.class);
                 startActivity(in);
             }
