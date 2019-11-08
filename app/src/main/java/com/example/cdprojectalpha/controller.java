@@ -4,33 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class controller extends AppCompatActivity {
     ImageButton go, back, left, right;
-    TextView t;
-    StringBuffer str = new StringBuffer();
+    TextView t, t2;
+    private int Gea = 0, Neu = 0, Dri = 1, Rev = 2; // 중립, 전진, 후진 기어
 
-    private void timecheck(){
-        Date today = new Date();
-        SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");
-        str.append(time.format(today));
-    }
-
-    private void scrollBottom(TextView textView) {
-        int lineTop =  textView.getLayout().getLineTop(textView.getLineCount()) ;
-        int scrollY = lineTop - textView.getHeight();
-        if (scrollY > 0) {
-            textView.scrollTo(0, scrollY);
-        } else {
-            textView.scrollTo(0, 0);
-        }
+    public void Gear(int sta){
+        Gea = sta;
     }
 
     @Override
@@ -44,28 +29,24 @@ public class controller extends AppCompatActivity {
         left = findViewById(R.id.imageButton3);
         right = findViewById(R.id.imageButton4);
         t = findViewById(R.id.textView9);
-        t.setMovementMethod(new ScrollingMovementMethod());
+        t2 = findViewById(R.id.textView6);
 
         if(option.connect == 1) {
-            timecheck();
-            str.append(" 연결 성공!\n");
-            t.setText(str);
+            t2.setText("EventLog(Network: ON)");
 
             go.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                         // 버튼을 눌렀을 때
-                        timecheck();
-                        str.append(" go\n");
-                        t.setText(str);
-                        scrollBottom(t);
+                        t.setText("LF|RF");
+                        option.c.Msg_Event("LF|RF");
+                        Gear(Dri);
                     }else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                         // 버튼에서 손을 떼었을 때
-                        timecheck();
-                        str.append(" go.stop\n");
-                        t.setText(str);
-                        scrollBottom(t);
+                        t.setText("LN|RN");
+                        option.c.Msg_Event("LN|RN");
+                        Gear(Neu);
                     }
                     return false;
                 }
@@ -76,16 +57,14 @@ public class controller extends AppCompatActivity {
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                         // 버튼을 눌렀을 때
-                        timecheck();
-                        str.append(" back\n");
-                        t.setText(str);
-                        scrollBottom(t);
+                        t.setText("LB|RB");
+                        option.c.Msg_Event("LB|RB");
+                        Gear(Rev);
                     }else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                         // 버튼에서 손을 떼었을 때
-                        timecheck();
-                        str.append(" back.stop\n");
-                        t.setText(str);
-                        scrollBottom(t);
+                        t.setText("LN|RN");
+                        option.c.Msg_Event("LN|RN");
+                        Gear(Neu);
                     }
                     return false;
                 }
@@ -96,16 +75,28 @@ public class controller extends AppCompatActivity {
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                         // 버튼을 눌렀을 때
-                        timecheck();
-                        str.append(" left\n");
-                        t.setText(str);
-                        scrollBottom(t);
+                        if(Gea == Dri){
+                            t.setText("LN|RF");
+                            option.c.Msg_Event("LN|RF");
+                        }
+                        else if(Gea == Rev){
+                            t.setText("LN|RB");
+                            option.c.Msg_Event("LN|RB");
+                        }
+                        else
+                            t.setText("Gear N");
                     }else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                         // 버튼에서 손을 떼었을 때
-                        timecheck();
-                        str.append(" left.stop\n");
-                        t.setText(str);
-                        scrollBottom(t);
+                        if(Gea == Dri){
+                            t.setText("LF|RF");
+                            option.c.Msg_Event("LF|RF");
+                        }
+                        else if(Gea == Rev){
+                            t.setText("LB|RB");
+                            option.c.Msg_Event("LB|RB");
+                        }
+                        else
+                            t.setText("Gear N");
                     }
                     return false;
                 }
@@ -116,23 +107,34 @@ public class controller extends AppCompatActivity {
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                         // 버튼을 눌렀을 때
-                        timecheck();
-                        str.append(" right\n");
-                        t.setText(str);
-                        scrollBottom(t);
+                        if(Gea == Dri){
+                            t.setText("LF|RN");
+                            option.c.Msg_Event("LF|RN");
+                        }
+                        else if(Gea == Rev){
+                            t.setText("LB|RN");
+                            option.c.Msg_Event("LB|RN");
+                        }
+                        else
+                            t.setText("Gear N");
                     }else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                         // 버튼에서 손을 떼었을 때
-                        timecheck();
-                        str.append(" right.stop\n");
-                        t.setText(str);
-                        scrollBottom(t);
+                        if(Gea == Dri){
+                            t.setText("LF|RF");
+                            option.c.Msg_Event("LF|RF");
+                        }
+                        else if(Gea == Rev){
+                            t.setText("LB|RB");
+                            option.c.Msg_Event("LB|RB");
+                        }
+                        else
+                            t.setText("Gear N");
                     }
                     return false;
                 }
             });
         }else{
-            str.append("연결 실패\n네트워크 연결을 확인하세요.\n");
-            t.setText(str);
+            t2.setText("EventLog(Network: OFF)");
         }
     }
 }
