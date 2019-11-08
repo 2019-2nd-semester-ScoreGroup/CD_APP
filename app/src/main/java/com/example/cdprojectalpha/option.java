@@ -48,7 +48,7 @@ public class option extends AppCompatActivity {
                 sport = port.getText().toString();
 
                 if(sip.equals("") && sport.equals("")){
-                    sip = "127.0.0.1";
+                    sip = "172.30.1.45";
                     sport = "12142";
                     set_string(sip, sport);
                     set_text(v1, v2, sport);
@@ -58,8 +58,7 @@ public class option extends AppCompatActivity {
                     set_string(sip, sport);
                     set_text(v1, v2, sport);
                 }
-
-                c.set_connect(sip, iport);
+                c.Set_IpPort(sip, iport);
                 c.start();
             }
         });
@@ -70,7 +69,7 @@ public class option extends AppCompatActivity {
                 if(connect == 1)
                     Toast.makeText(option.this, "연결 성공!", Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(option.this, "연결 실패", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(option.this, "연결 실패, 네트워크 설정을 다시 확인하세요!", Toast.LENGTH_SHORT).show();
             }
         });
 
